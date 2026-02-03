@@ -78,9 +78,9 @@ export const STORAGE_CONFIG_KEY = 'wolfcha_storage_config'
 export const DEFAULT_STORAGE_CONFIG: StorageConfig = {
   provider: 'qiniu',
   endpoint: 's3.cn-east-1.qiniucs.com',
-  accessKey: '',
-  secretKey: '',
-  bucket: '',
+  accessKey: '21wDcvS0uXaz-qWAcPtC4h4llnNWrvMHUNrUTe_z',
+  secretKey: '9RFBV6oK3uPshI4l7JV3N7BwgkTQYWwjbLFqDZJb',
+  bucket: '80zle4',
   region: 'cn-east-1',
 }
 

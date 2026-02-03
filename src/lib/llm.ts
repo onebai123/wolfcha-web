@@ -390,7 +390,10 @@ export function isQuotaExhaustedMessage(message: string): boolean {
   );
 }
 
+// 纯前端模式：API Key 来源类型
+export type ApiKeySource = "custom" | "builtin";
+
 // 纯前端模式：API Key 来源始终是用户配置
-export function resolveApiKeySource(): "custom" {
+export function resolveApiKeySource(_model?: string): ApiKeySource {
   return "custom";
 }
