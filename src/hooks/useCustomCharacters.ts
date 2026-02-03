@@ -13,7 +13,7 @@ export function useCustomCharacters(user: User | null) {
   const [error, setError] = useState<string | null>(null);
 
   const fetchCharacters = useCallback(async () => {
-    if (!user) {
+    if (!user || !supabase) {
       setCharacters([]);
       return;
     }
@@ -39,7 +39,7 @@ export function useCustomCharacters(user: User | null) {
   }, [user]);
 
   const createCharacter = useCallback(async (input: CustomCharacterInput): Promise<CustomCharacter | null> => {
-    if (!user) return null;
+    if (!user || !supabase) return null;
 
     if (characters.length >= MAX_CUSTOM_CHARACTERS) {
       setError(`Maximum ${MAX_CUSTOM_CHARACTERS} custom characters allowed`);

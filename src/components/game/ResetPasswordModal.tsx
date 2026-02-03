@@ -57,6 +57,10 @@ export function ResetPasswordModal({ open, onOpenChange, onSuccess }: ResetPassw
     setLoading(true);
 
     try {
+      if (!supabase) {
+        toast.error("Supabase 未配置");
+        return;
+      }
       const { error } = await supabase.auth.updateUser({
         password: newPassword,
       });

@@ -429,6 +429,7 @@ export function useGameLogic() {
   // 缓存 access token 用于游戏会话保存
   const accessTokenRef = useRef<string | null>(null);
   useEffect(() => {
+    if (!supabase) return;
     supabase.auth.getSession().then(({ data: { session } }) => {
       accessTokenRef.current = session?.access_token ?? null;
     });

@@ -50,6 +50,10 @@ export function AccountModal({ open, onOpenChange }: AccountModalProps) {
 
     try {
       // Update password using Supabase
+      if (!supabase) {
+        toast.error("Supabase 未配置");
+        return;
+      }
       const { error } = await supabase.auth.updateUser({
         password: newPassword,
       });

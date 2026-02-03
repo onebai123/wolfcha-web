@@ -70,6 +70,7 @@ function toErrorDebugObject(error: unknown): Record<string, unknown> {
 }
 
 async function getAccessToken(): Promise<string | null> {
+  if (!supabase) return null;
   const { data, error } = await supabase.auth.getSession();
   if (error) return null;
   return data.session?.access_token ?? null;
@@ -146,6 +147,10 @@ export const gameSessionTracker = {
    */
   async start(config: GameSessionConfig): Promise<string | null> {
     // 获取当前用户
+    if (!supabase) {
+      console.log("[game-session] Supabase not configured, skipping session tracking");
+      return null;
+    }
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       console.log("[game-session] No authenticated user, skipping session tracking");

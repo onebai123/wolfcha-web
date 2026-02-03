@@ -124,6 +124,11 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     setLoading(true);
     setError(null);
 
+    if (!supabase) {
+      setError("Supabase 未配置");
+      setLoading(false);
+      return;
+    }
     const { error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
       password,
@@ -157,6 +162,11 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     setLoading(true);
     setError(null);
 
+    if (!supabase) {
+      setError("Supabase 未配置");
+      setLoading(false);
+      return;
+    }
     const { error, data } = await supabase.auth.signUp({
       email: email.trim(),
       password,
@@ -215,6 +225,11 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     setLoading(true);
     setError(null);
 
+    if (!supabase) {
+      setError("Supabase 未配置");
+      setLoading(false);
+      return;
+    }
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
       redirectTo: redirectTo,
     });

@@ -16,7 +16,7 @@ export function useCredits() {
   const [isPasswordRecovery, setIsPasswordRecovery] = useState(false);
 
   const fetchCredits = useCallback(async () => {
-    if (!user) return;
+    if (!user || !supabase) return;
     setLoading(true);
 
     const { data, error } = await supabase
@@ -57,7 +57,7 @@ export function useCredits() {
   }, [session]);
 
   const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
+    if (supabase) await supabase.auth.signOut();
   }, []);
 
   const clearPasswordRecovery = useCallback(() => {
@@ -65,6 +65,7 @@ export function useCredits() {
   }, []);
 
   useEffect(() => {
+    if (!supabase) return;
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
